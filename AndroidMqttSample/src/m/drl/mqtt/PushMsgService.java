@@ -13,6 +13,9 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -79,6 +82,7 @@ public class PushMsgService extends Service implements MqttCallback {
 			OnPushMesageListener mOnPushMesageListeners) {
 		PushMsgService.mOnPushMesageListeners.add(mOnPushMesageListeners);
 	}
+
 	public final static void romvePushMesageListeners(
 			OnPushMesageListener mOnPushMesageListeners) {
 		PushMsgService.mOnPushMesageListeners.remove(mOnPushMesageListeners);
@@ -87,6 +91,7 @@ public class PushMsgService extends Service implements MqttCallback {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		mNotifMan = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		Client_id = "android_client";
 	}
 
@@ -111,9 +116,10 @@ public class PushMsgService extends Service implements MqttCallback {
 
 	private void onStartConnectioned() {
 		try {
-			mMqttClient = new MqttClient("tcp://192.168.0.83:1883", Client_id, null);
-//			mMqttClient = new MqttClient("tcp://" + MQTT_HOST + ":"
-//					+ MQTT_HOST_PORT, Client_id, null);
+			mMqttClient = new MqttClient("tcp://192.168.0.83:1883", Client_id,
+					null);
+			// mMqttClient = new MqttClient("tcp://" + MQTT_HOST + ":"
+			// + MQTT_HOST_PORT, Client_id, null);
 			MqttConnectOptions conOptions = new MqttConnectOptions();
 			conOptions.setCleanSession(true);
 			mMqttClient.setCallback(this);
@@ -133,6 +139,22 @@ public class PushMsgService extends Service implements MqttCallback {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private NotificationManager mNotifMan;
+
+	private void showNotification(String text) {
+		Notification n = new Notification();
+		n.flags |= Notification.FLAG_SHOW_LIGHTS;
+		n.flags |= Notification.FLAG_AUTO_CANCEL;
+		n.defaults = Notification.DEFAULT_ALL;
+		n.icon = m.drl.mqtt.R.drawable.ic_launcher;
+		n.when = System.currentTimeMillis();
+		PendingIntent pi = PendingIntent
+				.getActivity(this, 0, new Intent(""), 0);
+		n.setLatestEventInfo(this, "Push", text, pi);
+
+		mNotifMan.notify((int)System.currentTimeMillis(), n);
 	}
 
 	@Override
@@ -157,6 +179,7 @@ public class PushMsgService extends Service implements MqttCallback {
 				if (bytes != null) {
 					String message = new String(bytes);
 					Log.d(TAG, "- deliveryComplete()-mesage-" + message);
+					showNotification(message);
 					nofityPushMessage(message);
 				}
 			}
@@ -173,6 +196,7 @@ public class PushMsgService extends Service implements MqttCallback {
 			if (bytes != null) {
 				String message = new String(bytes);
 				Log.d(TAG, "- deliveryComplete()-mesage-" + message);
+				showNotification(message);
 				nofityPushMessage(message);
 			}
 		}
