@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * @author hljdrl@gmail.com
@@ -125,9 +126,11 @@ public class PushMsgService extends Service implements MqttCallback {
 			mMqttClient.setCallback(this);
 			mMqttClient.connect(conOptions);
 			mMqttClient.subscribe(SUBSCRIBE_MESAGE, 1);
-
+			MqttApplication.getInstance().setMqttStart(Boolean.TRUE);
+			Toast.makeText(this, "PushMsgService start... SUCC", Toast.LENGTH_LONG).show();
 		} catch (MqttException e) {
 			e.printStackTrace();
+			MqttApplication.getInstance().setMqttStart(Boolean.FALSE);
 		}
 	}
 
@@ -135,6 +138,8 @@ public class PushMsgService extends Service implements MqttCallback {
 		if (mMqttClient != null && mMqttClient.isConnected()) {
 			try {
 				mMqttClient.disconnect();
+				MqttApplication.getInstance().setMqttStart(Boolean.FALSE);
+				Toast.makeText(this, "PushMsgService stop... SUCC", Toast.LENGTH_LONG).show();
 			} catch (MqttException e) {
 				e.printStackTrace();
 			}
@@ -189,8 +194,8 @@ public class PushMsgService extends Service implements MqttCallback {
 	}
 
 	@Override
-	public void messageArrived(String arg0, MqttMessage arg1) throws Exception {
-		Log.d(TAG, "- messageArrived()");
+	public void messageArrived(String sub, MqttMessage arg1) throws Exception {
+		Log.d(TAG, "- messageArrived()"+sub);
 		if (arg1 != null) {
 			byte bytes[] = arg1.getPayload();
 			if (bytes != null) {

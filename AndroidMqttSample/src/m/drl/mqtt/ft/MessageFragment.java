@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import m.drl.mqtt.MesageAdapter;
+import m.drl.mqtt.MqttApplication;
 import m.drl.mqtt.OnPushMesageListener;
 import m.drl.mqtt.PushMsgService;
 import m.drl.mqtt.R;
@@ -53,9 +54,16 @@ public class MessageFragment extends Fragment implements OnClickListener,
 		mesageAdapter = new MesageAdapter(getActivity(), messagList);
 		lv_mesages.setAdapter(mesageAdapter);
 
+		btn_stop.setEnabled(false);
+
+		boolean start = MqttApplication.getInstance().isMqttStart();
+		if (start) {
+			btn_start.setEnabled(false);
+			btn_stop.setEnabled(true);
+		}
+		//
 		btn_start.setOnClickListener(this);
 		btn_stop.setOnClickListener(this);
-		btn_stop.setEnabled(false);
 
 	}
 
