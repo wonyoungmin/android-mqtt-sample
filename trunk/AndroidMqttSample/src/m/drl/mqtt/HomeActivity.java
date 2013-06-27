@@ -29,6 +29,7 @@ public class HomeActivity extends Activity implements OnPushMesageListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.root_home);
+		
 		btn_start = (Button) findViewById(R.id.button1);
 		btn_stop = (Button) findViewById(R.id.button2);
 		lv_mesages = (ListView) findViewById(R.id.lv_msg);
