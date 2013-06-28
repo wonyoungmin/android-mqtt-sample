@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.2
+Created-By: 1.6.0_10-rc2-b32 (Sun Microsystems Inc.)
+Bundle-Name: MQTTv3_Client Plug-in
+Bundle-SymbolicName: org.eclipse.paho.client.mqttv3;singleton:=true
+Bundle-Version: 0.9.0
+Bundle-ManifestVersion: 2
+Import-Package: javax.net;resolution:=optional,javax.net.ssl;resolutio
+ n:=optional
+Bundle-ClassPath: .
+Export-Package: org.eclipse.paho.client.mqttv3,org.eclipse.paho.client
+ .mqttv3.logging,org.eclipse.paho.client.mqttv3.persist,org.eclipse.pa
+ ho.client.mqttv3.util
+Bundle-Vendor: Eclipse.org
+Implementation-Version: 0.9.0
+Build-Level: LYYMMDD
+
