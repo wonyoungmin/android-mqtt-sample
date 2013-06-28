@@ -1,0 +1,96 @@
+<!-- 
+Licensed Materials - Property of IBM
+
+5747-SM3
+
+(C) Copyright IBM Corp. 1999, 2012 All Rights Reserved.
+
+US Government Users Restricted Rights - Use, duplication or
+disclosure restricted by GSA ADP Schedule Contract with
+IBM Corp.
+ -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/clientIDTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="38dp"
+        android:text="@string/clientID" />
+
+    <EditText
+        android:id="@+id/clientId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/clientIDTextView"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/clientIDTextView"
+        android:ems="10"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/serverTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/clientIDTextView"
+        android:layout_marginTop="27dp"
+        android:text="@string/server" />
+
+    <EditText
+        android:id="@+id/serverURI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/serverTextView"
+        android:layout_alignBottom="@+id/serverTextView"
+        android:layout_alignLeft="@+id/clientId"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/serverURIHint" />
+
+    <EditText
+        android:id="@+id/port"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/serverURI"
+        android:layout_below="@+id/serverURI"
+        android:layout_marginTop="22dp"
+        android:ems="10"
+        android:inputType="number"
+        android:hint="@string/portHint" />
+
+
+    <TextView
+        android:id="@+id/portTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/port"
+        android:layout_alignParentLeft="true"
+        android:text="@string/port" />
+
+    <TextView
+        android:id="@+id/cleanSessionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/portTextView"
+        android:layout_marginTop="42dp"
+        android:layout_toLeftOf="@+id/clientId"
+        android:text="@string/cleanSession" />
+
+    <CheckBox
+        android:id="@+id/cleanSessionCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/cleanSessionTextView"
+        android:layout_alignLeft="@+id/port"
+        android:text="@string/empty"
+        android:contentDescription="@string/contentDescriptionCleanSession" />
+
+
+</RelativeLayout>
