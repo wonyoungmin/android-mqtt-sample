@@ -22,19 +22,21 @@ public class HomeActivity extends BaseActivity {
 	private ViewPager mPager;
 	private SwipeyTabsView mSwipeyTabs;
 	private TabsAdapter mSwipeyTabsAdapter;
-
+	private String titles [] = new String[] { "Info", "消息", "资料" };
 	private void setuViews() {
 		setContentView(R.layout.root_home_r2);
 		initViewPager(10, 0xFFFFFFFF, 0xFF000000);
 		mSwipeyTabs = (SwipeyTabsView) findViewById(R.id.swipey_tabs);
-		mSwipeyTabsAdapter = new SwipeyTabsAdapter(this);
+		mSwipeyTabsAdapter = new SwipeyTabsAdapter(this,titles);
 		mSwipeyTabs.setAdapter(mSwipeyTabsAdapter);
 		mSwipeyTabs.setViewPager(mPager);
 	}
 
 	private void initViewPager(int pageCount, int backgroundColor, int textColor) {
 		mPager = (ViewPager) findViewById(R.id.pager);
-		mPager.setAdapter(new VPAFAdapter(getSupportFragmentManager()));
+		mPager.setAdapter(new VPAFAdapter(getSupportFragmentManager(),titles));
+		mPager.setCurrentItem(1);
+		mPager.setPageMargin(1);
 	}
 
 }

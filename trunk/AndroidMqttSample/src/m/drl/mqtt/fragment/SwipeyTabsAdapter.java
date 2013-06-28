@@ -9,12 +9,11 @@ public class SwipeyTabsAdapter implements TabsAdapter {
 	
 	private Activity mContext;
 	
-	private String[] mTitles = {
-	    "消息", "资料"
-	};
+	private final String[] mTitles ;
 	
-	public SwipeyTabsAdapter(Activity ctx) {
+	public SwipeyTabsAdapter(Activity ctx,String arg[]) {
 		this.mContext = ctx;
+		mTitles = arg;
 	}
 	
 	@Override

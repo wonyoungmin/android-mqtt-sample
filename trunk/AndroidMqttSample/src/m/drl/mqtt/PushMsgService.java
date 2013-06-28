@@ -37,8 +37,9 @@ public class PushMsgService extends Service implements MqttCallback {
 
 	private MqttClient mMqttClient;
 	private static String Client_id;
-	private String MQTT_HOST = "192.168.0.83";
-	private String MQTT_HOST_PORT = "1883";
+	public static final String MQTT_HOST = "192.168.0.83";
+	public static final String MQTT_HOST_PORT = "1883";
+	public static boolean CLEAN_SESSION = Boolean.TRUE;
 	private String SUBSCRIBE_MESAGE = "mqtt_android_message";
 
 	private static final String ACTION_START = Client_id + ".START";
@@ -93,7 +94,7 @@ public class PushMsgService extends Service implements MqttCallback {
 	public void onCreate() {
 		super.onCreate();
 		mNotifMan = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-		Client_id = "android_client";
+		Client_id = MqttApplication.getInstance().getDeviceId();
 	}
 
 	@Override
@@ -117,12 +118,12 @@ public class PushMsgService extends Service implements MqttCallback {
 
 	private void onStartConnectioned() {
 		try {
-			mMqttClient = new MqttClient("tcp://192.168.0.83:1883", Client_id,
+			mMqttClient = new MqttClient("tcp://"+MQTT_HOST+":"+MQTT_HOST_PORT, Client_id,
 					null);
 			// mMqttClient = new MqttClient("tcp://" + MQTT_HOST + ":"
 			// + MQTT_HOST_PORT, Client_id, null);
 			MqttConnectOptions conOptions = new MqttConnectOptions();
-			conOptions.setCleanSession(true);
+			conOptions.setCleanSession(CLEAN_SESSION);
 			mMqttClient.setCallback(this);
 			mMqttClient.connect(conOptions);
 			mMqttClient.subscribe(SUBSCRIBE_MESAGE, 1);
