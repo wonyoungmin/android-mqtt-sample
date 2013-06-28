@@ -30,6 +30,7 @@ import android.widget.Toast;
 public class PushMsgService extends Service implements MqttCallback {
 	private String TAG = "PushMsgService";
 
+	
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
@@ -40,7 +41,7 @@ public class PushMsgService extends Service implements MqttCallback {
 	public static final String MQTT_HOST = "192.168.0.83";
 	public static final String MQTT_HOST_PORT = "1883";
 	public static boolean CLEAN_SESSION = Boolean.TRUE;
-	private String SUBSCRIBE_MESAGE = "mqtt_android_message";
+	private String SUBSCRIBE_MESAGE = "android_message";
 
 	private static final String ACTION_START = Client_id + ".START";
 	private static final String ACTION_STOP = Client_id + ".STOP";
@@ -127,6 +128,7 @@ public class PushMsgService extends Service implements MqttCallback {
 			mMqttClient.setCallback(this);
 			mMqttClient.connect(conOptions);
 			mMqttClient.subscribe(SUBSCRIBE_MESAGE, 1);
+			
 			MqttApplication.getInstance().setMqttStart(Boolean.TRUE);
 			Toast.makeText(this, "PushMsgService start... SUCC", Toast.LENGTH_LONG).show();
 		} catch (MqttException e) {
