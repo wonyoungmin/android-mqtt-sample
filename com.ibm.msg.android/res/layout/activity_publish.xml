@@ -1,0 +1,115 @@
+<!-- 
+Licensed Materials - Property of IBM
+
+5747-SM3
+
+(C) Copyright IBM Corp. 1999, 2012 All Rights Reserved.
+
+US Government Users Restricted Rights - Use, duplication or
+disclosure restricted by GSA ADP Schedule Contract with
+IBM Corp.
+ -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/topictextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="38dp"
+        android:text="@string/topic" />
+
+    <EditText
+        android:id="@+id/lastWillTopic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/topictextView"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="14dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="@string/topicHint" />
+
+    <TextView
+        android:id="@+id/messageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/topictextView"
+        android:layout_marginTop="46dp"
+        android:text="@string/message"
+         />
+
+    <TextView
+        android:id="@+id/qosTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/messageTextView"
+        android:layout_marginTop="48dp"
+        android:text="@string/qos" />
+
+    <RadioGroup
+        android:id="@+id/qosRadio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/qosTextView"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+         >
+
+        <RadioButton
+            android:id="@+id/qos0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/qos0"
+             />
+
+        <RadioButton
+            android:id="@+id/qos1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qos1" />
+
+        <RadioButton
+            android:id="@+id/qos2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qos2" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/lastWill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/messageTextView"
+        android:layout_alignBottom="@+id/messageTextView"
+        android:layout_alignLeft="@+id/lastWillTopic"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:hint="@string/messageHint" />
+
+    <TextView
+        android:id="@+id/retainedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/qosTextView"
+        android:layout_marginTop="25dp"
+        android:text="@string/retained" />
+
+    <CheckBox
+        android:id="@+id/retained"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/retainedTextView"
+        android:layout_alignBottom="@+id/retainedTextView"
+        android:layout_alignRight="@+id/qosRadio"
+        android:text="@string/empty" />
+
+</RelativeLayout>
